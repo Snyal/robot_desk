@@ -1,0 +1,9 @@
+{"commands":
+    [
+       {
+        "tag":"get_weather",
+        "pattern":["il fait qu'elle temps", "qu'elle est la météo","il fait beau aujourd'hui"],
+        "response":[]
+        }
+    ]
+}

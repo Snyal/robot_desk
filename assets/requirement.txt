@@ -1,0 +1,12 @@
+python-dotenv
+openai
+numpy
+SpeechRecognition
+PyAudio
+pipwin
+ffmpeg
+libav-tools
+libasound-dev
+portaudio19-dev
+libportaudio2
+libportaudiocpp0

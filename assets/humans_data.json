@@ -1,0 +1,18 @@
+
+[
+    {
+    "id":0,
+    "name":"Alexandre Bordes",
+    "gender":0,
+    "birthday":"1998-12-30",
+    "work_place":"gps_location",
+    "schedul":"key agenda || mat data",
+    "situations":
+        [
+            {
+            "id":0,
+            "related person":[1,2]
+            }
+        ]
+    }
+]
