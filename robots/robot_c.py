@@ -4,7 +4,7 @@ import openai
 from robots.robot import Robot
 import enums.state_robot as state_robot
 
-OPENAI_KEY = ""
+OPENAI_KEY = "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"
 
 class Robot_Client(Robot) :
     head_Robot = None

@@ -7,6 +7,7 @@ import cv2
 import pickle
 import speech_recognition as sr
 from robots.robot_c import Robot_Client
+from robots.utils.microphone import Microphone
 
 
 thread_cond = threading.Condition()
@@ -37,7 +38,10 @@ def micro_task(source):
 
     global id_action # make global variable
     
+    #INIT
     robot_local.head_Robot.rotate_head(angle_x = 90, angle_y=90)
+    microphone = Microphone()
+
     try:
         while True:
                 print('listening...')
@@ -45,36 +49,39 @@ def micro_task(source):
                 voice = listener.listen(source)
        
                 try :
-                    
                     command = listener.recognize_google(voice, language="fr-FR")
                     # check if starter word was in the command
                 
                     if 'diesel' in command:
-      
+                      
+                        angle_x = microphone.get_orientation_last_ear()
+                        print("angle ", angle_x)
                         command = command.replace('diesel ', '')
-
+                       
                         # init question
                         robot_local.question = command
 
-                        if "droite" in command :
-                            print("COMMANDE DROITE")
-                            robot_local.head_Robot.rotate_head(angle_x = 180, angle_y = robot_local.head_Robot.current_y_angle)
+                        robot_local.head_Robot.rotate_head(angle_x = angle_x, angle_y = robot_local.head_Robot.current_y_angle)
                         
-                        if "gauche" in command :
-                            print("COMMANDE GAUCHE")
-                            robot_local.head_Robot.rotate_head(angle_x = 0, angle_y = robot_local.head_Robot.current_y_angle)
+                        # if "droite" in command :
+                        #     print("COMMANDE DROITE")
+                        #     robot_local.head_Robot.rotate_head(angle_x = 180, angle_y = robot_local.head_Robot.current_y_angle)
                         
-                        if "milieu" in command :
-                            print("COMMANDE MILIEU")
-                            robot_local.head_Robot.rotate_head(angle_x = 90, angle_y = 90)
+                        # if "gauche" in command :
+                        #     print("COMMANDE GAUCHE")
+                        #     robot_local.head_Robot.rotate_head(angle_x = 0, angle_y = robot_local.head_Robot.current_y_angle)
                         
-                        if "haut" in command :
-                            print("COMMANDE HAUT")
-                            robot_local.head_Robot.rotate_head(angle_x = robot_local.head_Robot.current_x_angle, angle_y = 0)
+                        # if "milieu" in command :
+                        #     print("COMMANDE MILIEU")
+                        #     robot_local.head_Robot.rotate_head(angle_x = 90, angle_y = 90)
+                        
+                        # if "haut" in command :
+                        #     print("COMMANDE HAUT")
+                        #     robot_local.head_Robot.rotate_head(angle_x = robot_local.head_Robot.current_x_angle, angle_y = 0)
 
-                        if "bas" in command :
-                            print("COMMANDE BAS")
-                            robot_local.head_Robot.rotate_head(angle_x = robot_local.head_Robot.current_x_angle, angle_y = 180)
+                        # if "bas" in command :
+                        #     print("COMMANDE BAS")
+                        #     robot_local.head_Robot.rotate_head(angle_x = robot_local.head_Robot.current_x_angle, angle_y = 180)
 
                         # process question to robot
                         
@@ -83,8 +90,8 @@ def micro_task(source):
                         #print(answer)
 
                         # TODO : replace by pre-answered questions
-                        id_action += 1
-                        id_action %= 2
+                        # id_action += 1
+                        # id_action %= 2
 
                         #print("je change id_action",id_action)
 
@@ -95,8 +102,7 @@ def micro_task(source):
 
     except:
         print("Microphone doesn't work!")    
-                
-    
+                  
 def head_task():
     counter = 0
     while True : 
@@ -113,7 +119,7 @@ try:
     port = 12345                           
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect(("192.168.87.180", port))
+    client_socket.connect(("192.168.167.180", port))
     connection = client_socket.makefile('wb')
 except:
     "server not found"

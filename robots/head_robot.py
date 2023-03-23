@@ -31,8 +31,6 @@ class Head_Robot :
     # TODO : make robuste to < 0
     def rotate_head(self, angle_x=0, angle_y=0):        
 
-
-
         p_angle_x = angle_to_percentage(angle_x)
         p_angle_y = angle_to_percentage(angle_y)
         
