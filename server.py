@@ -7,7 +7,7 @@ from robots.robot_s import Robot_Server
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345                             # Reserve a port for your service.
-s.bind(("192.168.167.180", port))                     # Bind to the port
+s.bind(("192.168.171.180", port))                     # Bind to the port
 s.listen(1)
 
 print('Socket now listening')

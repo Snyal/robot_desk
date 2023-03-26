@@ -36,8 +36,7 @@ class Robot_Client(Robot) :
         answer = response.choices[0].text.strip()
     
         return answer
-    
-
+            
     # ------ JSON ------
     def init_humans_data(self):
         f = open("assets/humans_data.json")

@@ -137,3 +137,6 @@ class Microphone():
 
     def get_orientation_last_ear(self):
         return int(self.tuning.read("DOAANGLE"))
+    
+    def is_activate(self):
+        return bool(self.tuning.read("VOICEACTIVITY"))
