@@ -85,7 +85,6 @@ def run_odt_and_draw_results(img, image_path, interpreter, threshold=0.5, data_f
     # coordinates based on the original image resolution
     
     if obj['score'] > threshold:
-
       
       ymin, xmin, ymax, xmax = obj['bounding_box']
       xmin = int(xmin * original_image_np.shape[1])

@@ -56,7 +56,6 @@ class Robot_Server(Robot) :
     def make_action_tracking(self):
         return
     
-
     def add_frame(self, frame):
         self.frames.append(frame)
 

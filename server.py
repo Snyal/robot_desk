@@ -3,11 +3,12 @@ import cv2
 import pickle
 import struct
 
-from robots.robot_s import Robot_Server 
+from robots.robot_s import Robot_Server
+from utils import take_picture 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345                             # Reserve a port for your service.
-s.bind(("192.168.171.180", port))                     # Bind to the port
+s.bind(("192.168.25.180", port))                     # Bind to the port
 s.listen(1)
 
 print('Socket now listening')
@@ -41,6 +42,9 @@ while True:
     robot.add_frame(frame)
 
     # start action robot:
+    if action == 5:
+        take_picture(robot)
+    
     robot.change_state(action)
     detection_result_image = robot.make_action()
     conn_client.send("Done".encode())

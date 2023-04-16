@@ -1,9 +1,11 @@
 from ast import walk
 import os
+import time
 import cv2
 import face_recognition
 import numpy as np
 
+current_save_image = 0
 
 def faces_encodings(path= "./images/persons"):
     persons = np.array([])
@@ -52,3 +54,10 @@ def write_name_over_bounding_box(image, bounding_box, name):
 # angle (degres) to percentage for servo motor
 def angle_to_percentage(angle):
     return 2+(angle/18)/2
+
+def take_picture(robot_s):
+
+    img_name = str(time.time())+".jpg"
+    last_img = robot_s.frames[-1]
+    cv2.imwrite("/home/bordes/Documents/development/robot_desk/assets/image_for_calibration/"+img_name, last_img)
+    print("photo prise")

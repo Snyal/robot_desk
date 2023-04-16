@@ -59,8 +59,7 @@ def micro_task(source):
 
     except:
         print("Microphone doesn't work!")    
-
-       
+     
 print("Starting Robot")
 robot_local = Robot_Client()
 #robot_local = Robot_Client(90,0)
