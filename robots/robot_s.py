@@ -6,7 +6,7 @@ import tensorflow as tf
 from utils import faces_recognitions, write_name_over_bounding_box
 
 N_FRAME = 10
-THRESHOLD_DETECTION = 0.6
+THRESHOLD_DETECTION = 0.2
 
 class Robot_Server(Robot) :
 
@@ -16,7 +16,7 @@ class Robot_Server(Robot) :
 
     def make_action(self):
         if self.current_state == state_robot.RobotState.DETECTION:
-            return self.make_action_detection()[0]
+            return self.make_action_detection()
             
         if self.current_state == state_robot.RobotState.RECOGNITION:
             return self.make_action_recognition()
@@ -51,11 +51,12 @@ class Robot_Server(Robot) :
                 name_detect = faces_recognitions(self.faces_emb, face, bbox)
                 detection_result_image = write_name_over_bounding_box(detection_result_image, bbox, name_detect)
 
-        return detection_result_image
+        return detection_result_image, boundings_boxs
 
     def make_action_tracking(self):
-        return
-    
+        detection_result_image, boundings_boxs = self.make_action_detection()
+        return detection_result_image, boundings_boxs
+        
     def add_frame(self, frame):
         self.frames.append(frame)
 

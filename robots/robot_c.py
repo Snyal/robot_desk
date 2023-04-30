@@ -1,4 +1,5 @@
 import json
+import numpy as np
 import openai
 from robots.head_robot import Head_Robot
 from robots.robot import Robot
@@ -14,6 +15,7 @@ class Robot_Client(Robot) :
 
     question = ""
     humans = {}
+    current_bounding_box = np.array([])
 
     def __init__(self):
         self.head_Robot = None

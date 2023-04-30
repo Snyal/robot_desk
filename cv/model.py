@@ -4,6 +4,8 @@ from PIL import Image
 import numpy as np
 import face_recognition
 
+from utils import get_center_bounding_box
+
 
 # Load the labels into a list
 classes = ["face"]
@@ -107,7 +109,13 @@ def run_odt_and_draw_results(img, image_path, interpreter, threshold=0.5, data_f
       label = "{}: {:.0f}%".format(classes[class_id], obj['score'] * 100)
 
       object_position = {"classe": class_id, "boundingBox":[ymin, xmin, ymax, xmax ]}
-      objects_position.append(object_position);
+
+      center = get_center_bounding_box(object_position)
+      print(center)
+      cv2.rectangle(original_image_np, (xmin, ymin), (xmax, ymax), color, 2)
+      cv2.circle(original_image_np, center, 10, color, 2)
+
+      objects_position.append(object_position)
 
 
   # Return the final image and bounding box

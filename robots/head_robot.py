@@ -31,6 +31,13 @@ class Head_Robot :
     # TODO : make robuste to < 0
     def rotate_head(self, angle_x=0, angle_y=0):        
 
+        if( angle_x > 200) :
+            angle_x = 90
+            print("behind me")
+
+        if( angle_y < 0 or angle_y > 120) :
+            angle_y = 90 
+   
         p_angle_x = angle_to_percentage(angle_x)
         p_angle_y = angle_to_percentage(angle_y)
         
